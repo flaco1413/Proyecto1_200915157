@@ -10,6 +10,19 @@
 <project name="Proyecto1_200915157" default="default" basedir=".">
     <description>Builds, tests, and runs the project Proyecto1_200915157.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <taskdef classname="jflex.anttask.JFlexTask" name="jflex" />
+    <taskdef classname="jflex.anttask.JFlexTask" name="jflex" classpath="path-to-jflex.jar" />
+    
+    <target name="-pre-compile">
+        <echo>--Compilando Lex---</echo>
+        <jflex 
+            file="${basedir}\src\JLexCup\lexico.jflex" 
+            destdir="${basedir}\src\proyecto1_200915157" 
+            verbose="true"
+        />
+        <echo>--Compilando Lex2---</echo>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
