@@ -11,15 +11,14 @@ public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
 System.out.println("Error sintactico sin recuperación en la Linea " + (s.right+1)+ "Columna "+s.left+". Identificador " + s.value + " no reconocido.");
 }
 
-public void metodo2(){}
 :}
 action code
 {:
 :}
 /*Declaracion de simbolos terminales*/
-terminal errorlex, est, endEst, dir, endDir, car, endCar, doc, endDoc, nom, endNom, f, endF,con,endCon,textop, texto;
+terminal errorlex, identificador;
 /*Declaracion de simbolos NO terminales*/
-non terminal START,INICIO, ESTRUCTURA, DIRECTORIO, CARPETA, DOCUMENTO;
+non terminal START,INICIO, ESTRUCTURA;
 /*Inicio de la gramatica*/
 start with START;
 
@@ -30,15 +29,6 @@ INICIO::=INICIO ESTRUCTURA
 |ESTRUCTURA
 ;
 
-ESTRUCTURA::=est DIRECTORIO endEst
-;
-
-DIRECTORIO::=dir textop endDir CARPETA
-;
-
-CARPETA::= car nom texto endNom DOCUMENTO endCar CARPETA
-|  
-;
-
-DOCUMENTO::= doc nom texto endNom f texto endF con textop endCon endDoc
-;
+ESTRUCTURA::= identificador{:System.out.println("IDENTIFICADOR"); :}
+|errorlex {: System.out.println("ERRORputo");:}
+|error;

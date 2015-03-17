@@ -26,20 +26,21 @@
     <target name="-pre-compile">
         <echo>--Compilando Lex---</echo>
         <jflex 
-            file="${basedir}\src\JLexCup\Scanner.jflex" 
+            file="${basedir}\src\JLexCup\ScannerConfig.jflex" 
             destdir="${basedir}\src" 
             verbose="true"
         />
         <echo>--Compilando Lex2---</echo>
         
         <cup 
-            srcfile="${basedir}\src\JLexCup\Parser.cup" 
+            srcfile="${basedir}\src\JLexCup\ParserConfig.cup" 
             interface="on" 
             destdir="${basedir}\src" 
             parser="sintactico" 
-            symbols="simbolos" 
+            symbols="SymConfig" 
             quiet="false"
-            nonterms="true"/>
+            nonterms="true"
+        />
     </target>
     <!--
 
