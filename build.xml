@@ -16,14 +16,30 @@
         classname="jflex.anttask.JFlexTask"
         classpath="${basedir}\lib\jflex-1.6.1.jar"
     />
+    
+    <taskdef
+        name="cup"
+        classname="java_cup.anttask.CUPTask"
+        classpath="${basedir}\lib\java-cup-11a.jar"  
+    />
+    
     <target name="-pre-compile">
         <echo>--Compilando Lex---</echo>
         <jflex 
-            file="${basedir}\src\JLexCup\lexico.jflex" 
-            destdir="${basedir}\src\proyecto1_200915157" 
+            file="${basedir}\src\JLexCup\Scanner.jflex" 
+            destdir="${basedir}\src" 
             verbose="true"
         />
         <echo>--Compilando Lex2---</echo>
+        
+        <cup 
+            srcfile="${basedir}\src\JLexCup\Parser.cup" 
+            interface="on" 
+            destdir="${basedir}\src" 
+            parser="sintactico" 
+            symbols="simbolos" 
+            quiet="false"
+            nonterms="true"/>
     </target>
     <!--
 

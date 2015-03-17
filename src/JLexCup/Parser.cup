@@ -1,0 +1,44 @@
+package proyecto1_200915157;
+import java_cup.runtime.*;
+parser code
+{:
+/**Metodo al que se llama automáticamente ante algún error sintactico.*/
+public void syntax_error(Symbol s){
+System.out.println("Error sintactico en la Linea " + (s.right+1) +" Columna "+s.left+ ". Identificador " +s.value + " no reconocido." );
+}
+/**Metodo al que se llama en el momento en que ya no es posible una recuperación de errores.*/
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+System.out.println("Error sintactico sin recuperación en la Linea " + (s.right+1)+ "Columna "+s.left+". Identificador " + s.value + " no reconocido.");
+}
+
+public void metodo2(){}
+:}
+action code
+{:
+:}
+/*Declaracion de simbolos terminales*/
+terminal errorlex, est, endEst, dir, endDir, car, endCar, doc, endDoc, nom, endNom, f, endF,con,endCon,textop, texto;
+/*Declaracion de simbolos NO terminales*/
+non terminal START,INICIO, ESTRUCTURA, DIRECTORIO, CARPETA, DOCUMENTO;
+/*Inicio de la gramatica*/
+start with START;
+
+START::= INICIO
+;
+
+INICIO::=INICIO ESTRUCTURA
+|ESTRUCTURA
+;
+
+ESTRUCTURA::=est DIRECTORIO endEst
+;
+
+DIRECTORIO::=dir textop endDir CARPETA
+;
+
+CARPETA::= car nom texto endNom DOCUMENTO endCar CARPETA
+|  
+;
+
+DOCUMENTO::= doc nom texto endNom f texto endF con textop endCon endDoc
+;
