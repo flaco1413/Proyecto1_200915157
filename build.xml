@@ -11,9 +11,11 @@
     <description>Builds, tests, and runs the project Proyecto1_200915157.</description>
     <import file="nbproject/build-impl.xml"/>
     
-    <taskdef classname="jflex.anttask.JFlexTask" name="jflex" />
-    <taskdef classname="jflex.anttask.JFlexTask" name="jflex" classpath="path-to-jflex.jar" />
-    
+    <taskdef 
+        name="jflex" 
+        classname="jflex.anttask.JFlexTask"
+        classpath="${basedir}\lib\jflex-1.6.1.jar"
+    />
     <target name="-pre-compile">
         <echo>--Compilando Lex---</echo>
         <jflex 

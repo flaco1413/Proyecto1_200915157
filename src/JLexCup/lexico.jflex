@@ -8,7 +8,7 @@
 %apiprivate
 %standalone
 
-Digito=[0-9]
+Digito=[09]
 Numero={Digito}+
 
 %%
