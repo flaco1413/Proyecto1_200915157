@@ -1,4 +1,4 @@
-package proyecto1_200915157;
+package Analizadores;
 
 import java_cup.runtime.Symbol;
 
