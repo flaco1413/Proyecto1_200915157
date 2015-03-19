@@ -38,9 +38,9 @@ public class Archivo {
     
     public String abrirArchivo(JFrame ventana) {
         String aux = "";
-        String texto = "";
+        String texto = null;
         try {
-            FileFilter filter = new FileNameExtensionFilter(".cyd","cyd");
+            FileFilter filter = new FileNameExtensionFilter(".xconf","xconf");
             /**
              * llamamos el metodo que permite cargar la ventana
              */
@@ -56,6 +56,7 @@ public class Archivo {
              * recorremos el archivo, lo leemos para plasmarlo en el area de texto
              */
             if (abre != null) {
+                MainWindow.path =abre.toString();
                 FileReader archivos = new FileReader(abre);
                 BufferedReader lee = new BufferedReader(archivos);
                 while ((aux = lee.readLine()) != null) {
@@ -71,7 +72,37 @@ public class Archivo {
         return texto;//El texto se almacena en el JTextArea
     }
     
-    public void guardarAt(String Ruta, String carpeta, String archivo, String tipo, String texto )
+    
+    public void guardarArchivo(JFrame ventana, String texto) {
+        try {
+            FileFilter filter = new FileNameExtensionFilter(".xconf","xconf");
+            String nombre = "";
+            JFileChooser file = new JFileChooser();
+            file.setFileFilter(filter);
+            file.showSaveDialog(ventana);
+            File guarda = file.getSelectedFile();
+
+            if (guarda != null) {
+                MainWindow.path = guarda.toString();
+                /*guardamos el archivo y le damos el formato directamente,
+                 * si queremos que se guarde en formato doc lo definimos como .doc*/
+                FileWriter save = new FileWriter(guarda + ".xconf");
+                save.write(texto);
+                save.close();
+                JOptionPane.showMessageDialog(null,
+                        "El archivo se a guardado Exitosamente",
+                        "Información", JOptionPane.INFORMATION_MESSAGE);
+                
+           
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Su archivo no se ha guardado",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+  public void guardarAt(String Ruta, String carpeta, String archivo, String tipo, String texto )
     {
         File folder = new File(Ruta);
         String Ruta2 = Ruta + "\\" + carpeta;
@@ -104,31 +135,6 @@ public class Archivo {
                 
     }
 
-    public void guardarArchivo(JFrame ventana, String texto) {
-        try {
-            String nombre = "";
-            JFileChooser file = new JFileChooser();
-            file.showSaveDialog(ventana);
-            File guarda = file.getSelectedFile();
-
-            if (guarda != null) {
-                /*guardamos el archivo y le damos el formato directamente,
-                 * si queremos que se guarde en formato doc lo definimos como .doc*/
-                FileWriter save = new FileWriter(guarda + ".cyd");
-                save.write(texto);
-                save.close();
-                JOptionPane.showMessageDialog(null,
-                        "El archivo se a guardado Exitosamente",
-                        "Información", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "Su archivo no se ha guardado",
-                    "Advertencia", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-    
-  
 
     public void guardarHTML(String errores) {
         String ini = "<html>\n"
