@@ -284,21 +284,24 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(path != null)
         {
+            this.archivo.guardarArchivo(this.editor.getText());
         }
         else
         {
-            this.archivo.guardarArchivo(this, this.editor.getText());
+            this.archivo.guardarArchivoComo(this, this.editor.getText());
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here
-        this.archivo.guardarArchivo(this, this.editor.getText());
+        this.archivo.guardarArchivoComo(this, this.editor.getText());
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
+        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

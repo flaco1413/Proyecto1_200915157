@@ -15,7 +15,8 @@ import java_cup.runtime.Symbol;
 
 numero =[0-9]+ "."? [0-9]*
 letra =[a-zA-ZñÑ]+
-identificador=({letra}|{numero}|"_")+
+identificador={letra}({letra}|{numero}|"_")*
+path=({letra}":\"\\")
 textop =\"[^\r\n]*\" 
 
 %%

@@ -29,13 +29,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author flaco
  */
 public class Archivo {
-    private JEditorPane editor;    
-    public void setEditor(JEditorPane editor)
-    {
-        this.editor = editor;
-    }
 
-    
     public String abrirArchivo(JFrame ventana) {
         String aux = "";
         String texto = null;
@@ -56,6 +50,7 @@ public class Archivo {
              * recorremos el archivo, lo leemos para plasmarlo en el area de texto
              */
             if (abre != null) {
+                texto="";
                 MainWindow.path =abre.toString();
                 FileReader archivos = new FileReader(abre);
                 BufferedReader lee = new BufferedReader(archivos);
@@ -73,7 +68,7 @@ public class Archivo {
     }
     
     
-    public void guardarArchivo(JFrame ventana, String texto) {
+    public void guardarArchivoComo(JFrame ventana, String texto) {
         try {
             FileFilter filter = new FileNameExtensionFilter(".xconf","xconf");
             String nombre = "";
@@ -102,71 +97,20 @@ public class Archivo {
         }
     }
     
-  public void guardarAt(String Ruta, String carpeta, String archivo, String tipo, String texto )
-    {
-        File folder = new File(Ruta);
-        String Ruta2 = Ruta + "\\" + carpeta;
-        File folder2 = new File(Ruta2);
-        if(folder.exists())
-        {
-            if (folder2.mkdir()) {
-                System.out.println("Se ha creado directorio");
-                try {
-                    FileWriter w = new FileWriter(folder2+"\\" + archivo+ "."+ tipo);
-                    BufferedWriter bw = new BufferedWriter(w);
-                    PrintWriter wr = new PrintWriter(bw);
-                    wr.write(texto);//escribimos en el archivo
-                   // wr.append(errores);
-                    //wr.append(end); //concatenamos en el archivo sin borrar lo existente
-
-            //ahora cerramos los flujos de canales de datos, al cerrarlos el archivo quedará guardado con información escrita
-                    //de no hacerlo no se escribirá nada en el archivo
-                    wr.close();
-                    bw.close();
-                } catch (IOException e) {
-                };
-            } else {
-                System.out.println("No se ha podido crear el directorio");
-            }
-        }else
-        {
-            System.out.println("No existe ruta");
-        }
-                
-    }
+//  
 
 
-    public void guardarHTML(String errores) {
-        String ini = "<html>\n"
-                + "<head>\n"
-                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"errores_lexicos.css\">\n"
-                + "<title>Errores_Lexicos</title>\n"
-                + "</head>\n"
-                + "<body> \n"
-                + "<div id=\"content\">\n"
-                + "    <table cellspacing=\"0\">\n"
-                +"	<caption>Errores Lexicos</caption>\n" 
-                + "        <tr>\n"
-                + "            <th>No</th>\n"
-                + "            <th>Error Lexico</th>\n"
-                + "            <th>Linea</th>\n"
-                + "            <th>Columna</th>\n"
-                + "        </tr>\n";
-        
-        String end = "    </table>\n"
-                + "</div>\n"
-                + "</body>\n"
-                + "</html>";
+    public void guardarArchivo(String texto) {
         File f;
-        f = new File("errores_lexicos.html");
+        f = new File(MainWindow.path);
         //Escritura
         try {
             FileWriter w = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(w);
             PrintWriter wr = new PrintWriter(bw);
-            wr.write(ini);//escribimos en el archivo
-            wr.append(errores);
-            wr.append(end); //concatenamos en el archivo sin borrar lo existente
+            wr.write(texto);//escribimos en el archivo
+           // wr.append(errores);
+            //wr.append(end); //concatenamos en el archivo sin borrar lo existente
 
             //ahora cerramos los flujos de canales de datos, al cerrarlos el archivo quedará guardado con información escrita
             //de no hacerlo no se escribirá nada en el archivo
@@ -175,4 +119,41 @@ public class Archivo {
         } catch (IOException e) {
         };
     }
+    
+//    public void guardarAt(String Ruta, String carpeta, String archivo, String tipo, String texto )
+//    {
+//        File folder = new File(Ruta);
+//        String Ruta2 = Ruta + "\\" + carpeta;
+//        File folder2 = new File(Ruta2);
+//        if(folder.exists())
+//        {
+//            if (folder2.mkdir()) {
+//                System.out.println("Se ha creado directorio");
+//                try {
+//                    FileWriter w = new FileWriter(folder2+"\\" + archivo+ "."+ tipo);
+//                    BufferedWriter bw = new BufferedWriter(w);
+//                    PrintWriter wr = new PrintWriter(bw);
+//                    wr.write(texto);//escribimos en el archivo
+//                   // wr.append(errores);
+//                    //wr.append(end); //concatenamos en el archivo sin borrar lo existente
+//
+//            //ahora cerramos los flujos de canales de datos, al cerrarlos el archivo quedará guardado con información escrita
+//                    //de no hacerlo no se escribirá nada en el archivo
+//                    wr.close();
+//                    bw.close();
+//                } catch (IOException e) {
+//                };
+//            } else {
+//                System.out.println("No se ha podido crear el directorio");
+//            }
+//        }else
+//        {
+//            System.out.println("No existe ruta");
+//        }
+//                
+//    }
+    
+    
+    
+    
 }
